@@ -1,9 +1,10 @@
 
-let intro, messages, textIndex, lettersToShow, logsElement, logs, roverData
+let intro, messages, textIndex, lettersToShow, logsElement, logs, newLogs, roverData
 
 const setup = () => {
   intro = document.getElementById('loading-text')
   logs = document.getElementById('logs')
+  newLogs = document.getElementById('new-logs')
   currentPositionElement = document.getElementById('current-position')
   getRoverData()
   messages = [
@@ -32,24 +33,28 @@ const getRoverData = () => {
 
 const initialise  = () => {
   // show loadeding sequence
+  var messagesProcessed = 0;
 
-  // setInterval(() => {
-  //   var text = messages[textIndex]
-  //   const rand = Math.random();
-  //   if (rand > 0.3){
-  //     if (lettersToShow <= text.length){
-  //       displayText(text.charAt(lettersToShow))
-  //       lettersToShow++
-  //     }
-  //     else {
-  //       textIndex++;
-  //       displayText('</br>')
-  //       lettersToShow = 0;
-  //     }
-  //   }
-  // }, 20)
+  messages.forEach((item, index, array) => {
+    setInterval(() => {
+      var text = messages[textIndex]
+      if (lettersToShow <= text.length){
+        displayText(text.charAt(lettersToShow))
+        lettersToShow++
+      }
+      else {
+        textIndex++;
+        displayText('</br>')
+        lettersToShow = 0;
+        messagesProcessed++;
+        if(messagesProcessed === array.length) {
+          loaded()
+        }
+      }
+    }, 250)
+  });
 
-  setTimeout(loaded, 2000);
+  // setTimeout(loaded, 2000);
 
 }
 
@@ -58,35 +63,35 @@ const getCurrentPosition = (data) => {
   console.log(roverData)
   const latitude = roverData[0].latitude
   const longitude = roverData[0].longitude
-  const altitude = roverData[0].altitude
-  currentPositionElement.innerHTML = `<p>Latitude:${latitude}</p><p>Longitude:${Longitude}:</p><p>Altitude:${altitude}</p>`
+  const altitude = roverData[0]['altitude (m)']
+  console.log(altitude)
+  currentPositionElement.innerHTML = `<p>Latitude: ${latitude}</p><p>Longitude: ${longitude}</p><p>Altitude: ${altitude}m</p>`
 }
 
 const recieveLogs = (data) => {
-  const logDataIndex = 0
-  const rand = Math.random()
+  let logDataIndex = 0
   setInterval(() => {
-    if (rand = 0.1){
+    const contents = newLogs.innerHTML
+    const rand = Math.random()
+    if (rand > 0.9){
       //log new oxygen
-      const newData = data[logDataIndex].oxygen
-      logs.innerHTML = `<p>New oxygen content data recieved: ${newData}</p>`
-    } else if (rand = 0.2){
+      const newData = data[logDataIndex]['oxygen content']
+      newLogs.innerHTML = `<p>New oxygen content data recieved: ${newData}</p>` + contents
+    } else if (rand > 0.8){
       //log new albedo
-      const newData = data[logDataIndex].aldedo
-      logs.innerHTML = `<p>New albedo content data recieved: ${newData}</p>`
-    } else if (rand = 0.3){
+      const newData = data[logDataIndex].albedo
+      newLogs.innerHTML = `<p>New albedo content data recieved: ${newData}</p>` + contents
+    } else if (rand > 0.7){
       //log new hydrogen
-      const newData = data[logDataIndex].hydrogen
-      logs.innerHTML = `<p>New hydrogen ontent data recieved: ${newData}</p>`
-    } else if (rand = 0.4){
+      const newData = data[logDataIndex]['hydrogen content']
+      newLogs.innerHTML = `<p>New hydrogen ontent data recieved: ${newData}</p>` + contents
+    } else if (rand > 0.6){
       //log new nitrogen
-      const newData = data[logDataIndex].nitrogen
-      logs.innerHTML = `<p>New nitrogen content data recieved: ${newData}</p>`
-    } else if (rand = 0.51){
+      const newData = data[logDataIndex]['nitrogen content']
+      newLogs.innerHTML = `<p>New nitrogen content data recieved: ${newData}</p>` + contents
+    } else if (rand < 0.05){
       //its down!
-      logs.innerHTML = `<p>Signal to curiosity lost</p>`
-      logs.innerHTML = `<p>Retrying connection...</p>`
-      logs.innerHTML = `<p>Connection successful</p>`
+      newLogs.innerHTML = `<p>Connection successful</p>` + `<p>Retrying connection...</p>` + `<p>Signal to curiosity lost</p>` + contents
     }
     logDataIndex ++
   }, 1000)
@@ -97,7 +102,7 @@ const displayText = (text) => {
 }
 
 const loaded = () => {
-  gsap.to("#probe-planet", {duration: 1, scale: 0.1, ease: 'power3.out'});
+  gsap.to("#probe-planet", {duration: 1, scale: 0.1, xPercent: -75, ease: 'power3.out'});
   gsap.to("#loading", {duration: 0.5, autoAlpha: 0})
   gsap.to("#dashboard", {duration: 0.5, autoAlpha: 1, delay: 0.2})
   var showDashboard = gsap.timeline();
