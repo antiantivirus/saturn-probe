@@ -23,6 +23,9 @@ p, span, a {
   line-height: 16px;
 }
 
+.text-green {
+  color: #71FF2E;
+}
 
 @media only screen and (min-width: 768px) {
   h1, h2, h3, h5 {

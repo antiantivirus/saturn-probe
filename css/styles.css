@@ -44,6 +44,33 @@ html, body {
 
 }
 
+.status::before {
+  content: '';
+  background-color: #71FF2E;
+  display: inline-block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: fade 2s infinite ease-in-out;
+  margin-right: 5px;
+}
+
+.status {
+  display: block
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 
 @media only screen and (min-width: 768px) {
