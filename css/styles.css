@@ -1,0 +1,80 @@
+html, body {
+  font-family: 'IBM Plex Mono', monospace;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+
+
+#probe-planet {
+  max-width: 500px;
+  max-height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#probe-planet svg {
+  /* animation: rotate 30s infinite linear; */
+  overflow: visible;
+}
+
+#probe {
+  animation: rotate 30s infinite linear;
+  transform-origin: center center;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* dashboard */
+
+
+#dashboard {
+  display: grid
+}
+
+#dashboard-side {
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  #dashboard-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #dashboard {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 100vh;
+  }
+
+  #dashboard-main {
+    grid-column: 1 / span 10;
+    /* grid-column-start: 1; */
+    grid-row-start: 1;
+  }
+
+  #dashboard-side {
+    grid-column: 11 / span 2;
+    /* grid-column-start: 10; */
+  }
+
+}
+
+
