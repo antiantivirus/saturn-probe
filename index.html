@@ -35,7 +35,7 @@
 
 <body>
   <div id="loading" aria-label="Developer, designer and coffee addict">
-    <span id="text" aria-hidden="true"></span>
+    <span id="loading-text" aria-hidden="true"></span>
   </div>
   
   <div id="probe-planet">
@@ -49,34 +49,34 @@
 
   <div id="dashboard">
     <aside id="dashboard-side">
-      <header>
+      <header class="dashboard-element">
         <h1>Saturn Probe Dashboard</h1>
         <h2>08:09, 08/03/2022</h2>
         <h3>V0.3.01</h3>
       </header>
-      <section id="position">
+      <section id="position" class="dashboard-element">
         <h4>Current Position</h4>
       </section>
-      <section id="logs">
+      <section id="logs" class="dashboard-element">
         <h4>Incoming Logs</h4>
       </section>
-      <section id="overview">
+      <section id="overview" class="dashboard-element">
         <span class="text-green status">All systems operational</span>
         <span class="text-green status">Connection stable</span>
       </section>
     </aside>
     <main id="dashboard-main">
-      <section id="webcam">
+      <section id="webcam" class="dashboard-element">
         <h4>Live webcam</h4>
-        <iframe width="100%" height="100%" src="https://ustream.tv/embed/17074538" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe>
+        <iframe width="100%" height="80%" src="https://ustream.tv/embed/17074538" scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0" style="border: 0 none transparent;"></iframe>
       </section>
-      <section id="tbc">
+      <section id="tbc" class="dashboard-element">
         <h4>Latest ?</h4>
       </section>
-      <section id="position">
+      <section id="position" class="dashboard-element">
         <h4>Positional data</h4>
       </section>
-      <section id="photo">
+      <section id="photo" class="dashboard-element">
         <h4>Latest photographic data</h4>
         <div>
           <img src="/img/photo_2.jpeg" />

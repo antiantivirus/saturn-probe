@@ -15,6 +15,7 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 20;
 }
 
 #probe-planet svg {
@@ -25,6 +26,16 @@ img {
 #probe {
   animation: rotate 30s infinite linear;
   transform-origin: center center;
+}
+
+#loading {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: black;
 }
 
 @keyframes rotate {
@@ -41,7 +52,12 @@ img {
 
 
 #dashboard {
-  display: grid
+  display: grid;
+}
+
+.dashboard-element {
+  opacity: 0;
+  visibility: hidden;
 }
 
 #dashboard-side {
