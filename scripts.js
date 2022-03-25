@@ -3,9 +3,8 @@ let intro, messages, textIndex, lettersToShow, logsElement, logs, roverData
 
 const setup = () => {
   intro = document.getElementById('loading-text')
-
   logs = document.getElementById('logs')
-
+  currentPositionElement = document.getElementById('current-position')
   getRoverData()
   messages = [
     "Connecting to Curiosity...",
@@ -26,37 +25,71 @@ const getRoverData = () => {
   .then(response => response.json())
   .then(data => {
     roverData = data
-    console.log(roverData)
+    getCurrentPosition(data)
+    recieveLogs(data)
   });
 }
 
 const initialise  = () => {
   // show loadeding sequence
 
-  setInterval(() => {
-    var text = messages[textIndex]
-    const rand = Math.random();
-    if (rand > 0.3){
-      if (lettersToShow <= text.length){
-        displayText(text.charAt(lettersToShow))
-        lettersToShow++
-      }
-      else {
-        textIndex++;
-        displayText('</br>')
-        lettersToShow = 0;
-      }
-    }
-  }, 20)
+  // setInterval(() => {
+  //   var text = messages[textIndex]
+  //   const rand = Math.random();
+  //   if (rand > 0.3){
+  //     if (lettersToShow <= text.length){
+  //       displayText(text.charAt(lettersToShow))
+  //       lettersToShow++
+  //     }
+  //     else {
+  //       textIndex++;
+  //       displayText('</br>')
+  //       lettersToShow = 0;
+  //     }
+  //   }
+  // }, 20)
 
-  getCurrentPosition(roverData)
-  setTimeout(loaded, 8000);
+  setTimeout(loaded, 2000);
 
 }
 
 
 const getCurrentPosition = (data) => {
+  console.log(roverData)
+  const latitude = roverData[0].latitude
+  const longitude = roverData[0].longitude
+  const altitude = roverData[0].altitude
+  currentPositionElement.innerHTML = `<p>Latitude:${latitude}</p><p>Longitude:${Longitude}:</p><p>Altitude:${altitude}</p>`
+}
 
+const recieveLogs = (data) => {
+  const logDataIndex = 0
+  const rand = Math.random()
+  setInterval(() => {
+    if (rand = 0.1){
+      //log new oxygen
+      const newData = data[logDataIndex].oxygen
+      logs.innerHTML = `<p>New oxygen content data recieved: ${newData}</p>`
+    } else if (rand = 0.2){
+      //log new albedo
+      const newData = data[logDataIndex].aldedo
+      logs.innerHTML = `<p>New albedo content data recieved: ${newData}</p>`
+    } else if (rand = 0.3){
+      //log new hydrogen
+      const newData = data[logDataIndex].hydrogen
+      logs.innerHTML = `<p>New hydrogen ontent data recieved: ${newData}</p>`
+    } else if (rand = 0.4){
+      //log new nitrogen
+      const newData = data[logDataIndex].nitrogen
+      logs.innerHTML = `<p>New nitrogen content data recieved: ${newData}</p>`
+    } else if (rand = 0.51){
+      //its down!
+      logs.innerHTML = `<p>Signal to curiosity lost</p>`
+      logs.innerHTML = `<p>Retrying connection...</p>`
+      logs.innerHTML = `<p>Connection successful</p>`
+    }
+    logDataIndex ++
+  }, 1000)
 }
 
 const displayText = (text) => {
