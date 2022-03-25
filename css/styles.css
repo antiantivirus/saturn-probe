@@ -106,7 +106,6 @@ img {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     max-height: 100vh;
-    grid-gap: 1rem;
   }
 
   #dashboard-main {
@@ -114,7 +113,7 @@ img {
     /* grid-column-start: 1; */
     grid-row-start: 1;
     max-height: 100vh;
-    grid-gap: 1rem;
+    border-right: 1px solid #FFFFFF;
   }
 
   #dashboard-main > section {
@@ -124,7 +123,23 @@ img {
   #dashboard-side {
     grid-column: 11 / span 2;
     /* grid-column-start: 10; */
-    grid-gap: 1rem;
+  }
+
+  #dashboard-side header, #current-position, #logs{
+    border-bottom: 1px solid #FFFFFF;
+  }
+
+  #webcam {
+    border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+  }
+
+  #tbc {
+    border-bottom: 1px solid #FFFFFF;
+  }
+
+  #position {
+    border-right: 1px solid #FFFFFF;
   }
 
 }
