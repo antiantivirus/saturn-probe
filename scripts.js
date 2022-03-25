@@ -1,12 +1,14 @@
 
-let intro, messages, textIndex, lettersToShow, logsElement, logs, newLogs, roverData
+let intro, messages, textIndex, lettersToShow, logsElement, logs, newLogs, roverData, dateElement
 
 const setup = () => {
   intro = document.getElementById('loading-text')
   logs = document.getElementById('logs')
   newLogs = document.getElementById('new-logs')
   currentPositionElement = document.getElementById('current-position')
+  dateElement = document.getElementById('date')
   getRoverData()
+  getDate()
   messages = [
     "Connecting to Curiosity...",
     "Connection successful...",
@@ -29,6 +31,17 @@ const getRoverData = () => {
     getCurrentPosition(data)
     recieveLogs(data)
   });
+}
+
+const getDate = () => {
+  setInterval(() => {
+    let date = Date.now()
+
+    var today  = new Date();
+
+    dateElement.innerHTML = today.toLocaleString("en-US"); // Saturday, September 17, 2016
+
+  }, 1000)
 }
 
 const initialise  = () => {
