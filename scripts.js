@@ -1,5 +1,5 @@
 
-let intro, message, textIndex, lettersToShow, logsElement, logs, roverData
+let intro, messages, textIndex, lettersToShow, logsElement, logs, roverData
 
 const setup = () => {
   intro = document.getElementById('loading-text')
