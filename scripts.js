@@ -1,9 +1,10 @@
 
-let intro, message, textIndex, lettersToShow, logsElement, logs
+let intro, message, textIndex, lettersToShow, logsElement, logs, roverData
 
 const setup = () => {
   intro = document.getElementById('loading')
   logs = document.getElementById('logs')
+  getRoverData()
   messages = [
     "Connecting to Curiosity...",
     "Connection successful...",
@@ -18,31 +19,40 @@ const setup = () => {
   lettersToShow = 0;
 }
 
+const getRoverData = () => {
+  fetch("data/roverData.json")
+  .then(response => response.json())
+  .then(data => {
+    roverData = data
+    console.log(roverData)
+  });
+}
+
 const initialise  = () => {
   //show loadeding sequence
 
-  setInterval(() => {
-    var text = messages[textIndex]
-    if(lettersToShow <= text.length){
-      lettersToShow++
-      displayText(text.substring(0, lettersToShow))
-    }
-    else{
-      textIndex++;
-      lettersToShow = 0;
-    }
-  }, 20)
+  // setInterval(() => {
+  //   var text = messages[textIndex]
+  //   if(lettersToShow <= text.length){
+  //     lettersToShow++
+  //     displayText(text.substring(0, lettersToShow))
+  //   }
+  //   else{
+  //     textIndex++;
+  //     lettersToShow = 0;
+  //   }
+  // }, 20)
 
 
   loaded()
 }
 
-displayText(text);
+// displayText(text);
 
-function displayText(text){
-  var typewriterContainer = document.querySelector("#loading #text");
-  typewriterContainer.innerHTML = text + ".";
-}
+// function displayText(text){
+//   var typewriterContainer = document.querySelector("#loading #text");
+//   typewriterContainer.innerHTML = text + ".";
+// }
 
 const loaded = () => {
   gsap.to("#probe-planet", {duration: 0.5, scale: 0.1, ease: 'power3.out'});
